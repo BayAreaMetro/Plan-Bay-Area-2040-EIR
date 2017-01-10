@@ -1,8 +1,10 @@
---Build Alternative 4 Growth Footprint Tables using rules defined below:
---Select All parcels from run7224_Building_Data_2040 where year built is greater than or equal to 2016. 
---Join to parcel geometry using Parcel_id by selecting all parcels from run7224_Building_Data_2040 that are related to Parcel Geometry (Left Outer Join)
---To get the total res and jobs units, join to RUN7224_PARCEL_DATA_DIFF using Parcel_ID by selecting all parcels from Parcel Geometry that are related to RUN7224_PARCEL_DATA_DIFF
---The footprint uses a threshold of GT 8 ppl per acre or 10 jobs per acre.
+
+#Build All Scenario Growth Footprint Tables using rules defined below:
+#Select parcels where year built is greater than or equal to 2016. 
+#Join to parcel geometry using parcel_id in parcel_shareable_09_01_2016 https://github.com/MetropolitanTransportationCommission/bayarea_urbansim#parcel-geometries
+#To get the total res and jobs units, join to parcel_output.csv files from urbansim
+#The footprint uses a threshold of greatet than 8 ppl per acre or 10 jobs per acre.
+#Because the urbansim output does not contain ppl per parcel, an average hhsize of 2.69 was used to estimate population for each parcel based upon nthe number of res. units on that parcel.
 --Because the alt output does not contain ppl per parcel, an average hhsize of 2.69 was used to estimate population for each parcel based upon nthe number of res. units on that parcel.
 --select count(objectid) From UrbanSim.UrbanSim_Parcels
 --Total Parcels (1956208)
