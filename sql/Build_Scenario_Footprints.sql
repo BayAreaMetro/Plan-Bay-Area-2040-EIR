@@ -21,21 +21,24 @@ SELECT  p.COUNTY_ID as county_id,
 FROM Analysis.run10_parcel_output as r
 LEFT JOIN Analysis.p09_01_2015_parcel_shareable as p
 ON p.parcel_id = r.parcel_id
-WHERE cast(r.year_built AS integer)>2015
+WHERE cast(r.year_built AS integer)>2015;
 
 GO
 
 CREATE VIEW Analysis.run17_parcel_output_spatial AS
-SELECT  Analysis.p09_01_2015_parcel_shareable.COUNTY_ID as county_id, 
+SELECT  p.COUNTY_ID as county_id, 
 		r.parcel_id as parcel_id, 
-		cast(r.year_built as integer) asyear_built,
-		cast(r.job_spaces as integer) asjob_spaces,
-		cast(r.total_residential_units as integer) astotal_residential_units,
+		cast(r.year_built as integer) as year_built,
+		cast(r.job_spaces as integer) as job_spaces,
+		cast(r.total_residential_units as integer) as total_residential_units,
+		Round(p.shape.STArea()*0.000247105381,2) as Acres,
+		Cast((2.69*r.total_residential_units)/(p.shape.STArea()*0.000247105381) as numeric(18,2)) as People_Per_Acre,
+		Cast((r.job_spaces/(p.shape.STArea()*0.000247105381)) as numeric(18,2)) as Jobs_Per_Acre,
 		p.Shape as Shape
 FROM Analysis.run17_parcel_output as r
-left join Analysis.p09_01_2015_parcel_shareable
-on p.parcel_id = Analysis.run17_parcel_output.parcel_id
-WHERE cast(Analysis.run17_parcel_output.year_built as integer)>2015
+left join Analysis.p09_01_2015_parcel_shareable as p
+on p.parcel_id = r.parcel_id
+WHERE cast(r.year_built as integer)>2015;
 
 GO
 
@@ -45,9 +48,12 @@ SELECT  p.COUNTY_ID as county_id,
 		cast(r.year_built as integer) as year_built,
 		cast(r.job_spaces as integer) as job_spaces,
 		cast(r.total_residential_units as integer) as total_residential_units,
+		Round(p.shape.STArea()*0.000247105381,2) as Acres,
+		Cast((2.69*r.total_residential_units)/(p.shape.STArea()*0.000247105381) as numeric(18,2)) as People_Per_Acre,
+		Cast((r.job_spaces/(p.shape.STArea()*0.000247105381)) as numeric(18,2)) as Jobs_Per_Acre,
 		p.Shape as Shape
 FROM Analysis.run11_parcel_output as r
-left join Analysis.p09_01_2015_parcel_shareable
+left join Analysis.p09_01_2015_parcel_shareable as p
 on p.parcel_id = r.parcel_id
 WHERE cast(r.year_built as integer)>2015;
 
@@ -56,12 +62,15 @@ GO
 CREATE VIEW Analysis.run12_parcel_output_spatial AS
 SELECT  p.COUNTY_ID as county_id, 
 		r.parcel_id as parcel_id, 
-		cast(r.year_built as integer) asyear_built,
-		cast(r.job_spaces as integer) asjob_spaces,
-		cast(r.total_residential_units as integer) astotal_residential_units,
+		cast(r.year_built as integer) as year_built,
+		cast(r.job_spaces as integer) as job_spaces,
+		cast(r.total_residential_units as integer) as total_residential_units,
+		Round(p.shape.STArea()*0.000247105381,2) as Acres,
+		Cast((2.69*r.total_residential_units)/(p.shape.STArea()*0.000247105381) as numeric(18,2)) as People_Per_Acre,
+		Cast((r.job_spaces/(p.shape.STArea()*0.000247105381)) as numeric(18,2)) as Jobs_Per_Acre,
 		p.Shape as Shape
 FROM Analysis.run12_parcel_output as r
-left join Analysis.p09_01_2015_parcel_shareable
+left join Analysis.p09_01_2015_parcel_shareable as p
 on p.parcel_id = r.parcel_id
 WHERE cast(r.year_built as integer)>2015;
 
@@ -70,12 +79,15 @@ GO
 CREATE VIEW Analysis.run7224_parcel_output_spatial AS
 SELECT  p.COUNTY_ID as county_id, 
 		r.parcel_id as parcel_id, 
-		cast(r.year_built as integer) asyear_built,
-		cast(r.job_spaces as integer) asjob_spaces,
-		cast(r.total_residential_units as integer) astotal_residential_units,
+		cast(r.year_built as integer) as year_built,
+		cast(r.job_spaces as integer) as job_spaces,
+		cast(r.total_residential_units as integer) as total_residential_units,
+		Round(p.shape.STArea()*0.000247105381,2) as Acres,
+		Cast((2.69*r.total_residential_units)/(p.shape.STArea()*0.000247105381) as numeric(18,2)) as People_Per_Acre,
+		Cast((r.job_spaces/(p.shape.STArea()*0.000247105381)) as numeric(18,2)) as Jobs_Per_Acre,
 		p.Shape as Shape
 FROM Analysis.run7224_parcel_output as r
-left join Analysis.p09_01_2015_parcel_shareable
+left join Analysis.p09_01_2015_parcel_shareable as p
 on p.parcel_id = r.parcel_id
 WHERE cast(r.year_built as integer)>2015;
 
