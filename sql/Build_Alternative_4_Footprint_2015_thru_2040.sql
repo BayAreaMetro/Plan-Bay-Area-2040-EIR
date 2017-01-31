@@ -18,8 +18,8 @@ Distinct
 Top 20000
 p.OBJECTID, 
 p.COUNTY_ID, 
-alt_4_bldg.parcel_id, 
-alt_4_bldg.year_built,
+alt_4_bldg.parcel_id,--removed alt_4_bldg.year_built due to duplicate multiple year built values for single parcels
+--alt_4_bldg.year_built,
 Cast(2.69*alt_4_Diff.total_residential_units as numeric(18,0)) as Estimated_Population, 
 Cast(alt_4_Diff.total_residential_units as numeric(18,0)) as total_residential_units, 
 alt_4_Diff.total_job_spaces, 
@@ -47,7 +47,7 @@ SELECT
 OBJECTID, 
 COUNTY_ID, 
 parcel_id, 
-year_built, 
+--year_built, 
 Estimated_Population, 
 total_residential_units, 
 total_job_spaces, 
