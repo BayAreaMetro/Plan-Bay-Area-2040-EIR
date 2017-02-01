@@ -101,4 +101,21 @@ Go
 --select * From UrbanSim.Alt_1_GrowthFootprint_Features
 --select * From UrbanSim.Alt_3_GrowthFootprint_Features
 --select * From UrbanSim.Alt_4_GrowthFootprint_Features
-select * From UrbanSim.Alt_5_GrowthFootprint_Features
+--select * From UrbanSim.Alt_5_GrowthFootprint_Features
+
+--Create Feature Tables for each Alternative
+select * 
+into UrbanSim.Alt_0_FC
+From UrbanSim.Alt_0_GrowthFootprint_Features
+select * 
+into UrbanSim.Alt_1_FC
+From UrbanSim.Alt_1_GrowthFootprint_Features
+select * 
+into UrbanSim.Alt_3_FC
+From UrbanSim.Alt_3_GrowthFootprint_Features
+select * 
+into UrbanSim.Alt_4_FC
+From UrbanSim.Alt_4_GrowthFootprint_Features
+select * 
+into UrbanSim.Alt_5_FC
+From UrbanSim.Alt_5_GrowthFootprint_Features
