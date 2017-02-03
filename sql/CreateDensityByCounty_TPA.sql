@@ -49,3 +49,19 @@ ORDER BY Total_Dups DESC
 
 select * From UrbanSim.Alt_4_Counties_TPAs_Density
 Where parcel_id = '1019099'
+
+--create a view that removes the duplicates
+
+CREATE VIEW UrbanSim.Alt_4_Counties_TPAs_Density_NoDups AS
+select * FROM UrbanSim.Alt_4_Counties_TPAs_Density 
+WHERE NOT 
+( (PARCEL_ID = 389059 AND countyFIP <> 1) OR
+	(PARCEL_ID = 389065 AND countyFIP <> 1) OR
+	(PARCEL_ID = 728181 AND countyFIP <> 13)  OR
+	(PARCEL_ID = 729197 AND countyFIP <> 13)  OR
+	(PARCEL_ID = 1019099 AND countyFIP <> 75)  OR
+	(PARCEL_ID = 1038093 AND countyFIP <> 81)  OR
+	(PARCEL_ID = 1050874 AND countyFIP <> 81)  OR
+	(PARCEL_ID = 1196423 AND countyFIP <> 81)  OR
+	(PARCEL_ID = 1311949 AND countyFIP <> 85)  OR
+	(PARCEL_ID = 1311950 AND countyFIP <> 85) )
