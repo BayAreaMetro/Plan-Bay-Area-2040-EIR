@@ -16,6 +16,14 @@ from UrbanSim.COUNTIES_TPAS_ALT_4_OVERLAY
 Order By parcel_id
 Go
 
+--------------------------------
+-----------Fix Duplicate Parcels
+-----------In the household
+-----------and employment
+-----------change tables, be scenario
+--------------------------------
+
+
 Go
 --Drop view UrbanSim.Dup_GrowthParcels 
 drop view UrbanSim.County_Dup_Parcels;
@@ -321,7 +329,21 @@ WHERE t1.FID_TPAs = 1;
 
 GO
 
+---------------
+---------------
+-------Begin household and employment 
+-------in TPA's work
+-------where showing numbers in 2015
+-------and in 2040, rather than change
+---------------
+---------------
+
 /*
+Repost of the goal below. Because many parcels are in TPA's 
+but not in the growth footprints, by using just the footprint tables above, 
+we can't determine what 2040 or 2015 counts look like. 
+So, we restate the goal, and back out whats needed.
+
 GOAL:
 3.       Quantify by County the:
 a.       2015 and 2040 Dwelling Units per acre within TPAs
@@ -356,6 +378,10 @@ FROM            UrbanSim.COUNTIES_TPAS_ALT_4_OVERLAY as t1
 WHERE t1.FID_TPAs = 1;
 
 
+-------------------
+-------Put TPA's on 
+-------all parcels
+-------------------
 
 --we need to know the TPA for every parcel
 --So, first we need to assign a TPA value to each parcel
@@ -446,12 +472,16 @@ ALTER TABLE UrbanSim.Parcels_Centroid_Only
 DROP COLUMN "tpa_objectid";
 
 -----------------
+-----------------
+--Create Baseline 2050 household and employment numbers from alt 4  
+-----------------
+-----------------
 
 ---based on table creation in Build_Alternative_4_Footprint file
 ---because alt_4 is the preferred scenario--we will use it as the 
 ---baseline for 2015
 ---in theory the scenarios should all be the same for 2015
----but in practice the preferred has had th most review
+---but in practice the preferred has had the most review
 ---and so is probably the most accurate
 
 create view UrbanSim.Alt_4_2040_parcels_in_tpas_units_and_jobs as
@@ -469,6 +499,12 @@ FROM
 	UrbanSim.RUN7224_PARCEL_DATA_2040 AS y2040 ON p.PARCEL_ID = y2040.parcel_id
 	--alt_4 is based on simulation run 7224
 Go
+
+--------------------------
+--------------------
+--Create 2015 and 2040 counts from diff and baseline
+-------------------
+--------------------------
 
 
 DROP view UrbanSim.Alt_4_2015_and_2040_parcel_units_and_jobs_in_tpas_by_parcel;
@@ -496,7 +532,80 @@ FROM
 	UrbanSim.Alt_4_Counties_TPAs_Density as t1 ON t1.parcel_id = y2040.parcel_id
 Go
 
+DROP view UrbanSim.Alt_3_2015_and_2040_parcel_units_and_jobs_in_tpas_by_parcel;
+GO
+create view UrbanSim.Alt_3_2015_and_2040_parcel_units_and_jobs_in_tpas_by_parcel as
+SELECT
+	y2040.parcel_id,
+	y2040.COUNTY_ID,
+	y2040.Acres,
+	y2040.total_residential_units as residential_units_estimate_2040,
+	y2040.total_job_spaces as job_spaces_estimate_2040,
+		(y2040.total_residential_units-
+		CASE WHEN t1.total_residential_units 
+			IS NULL THEN 0 ELSE 
+			t1.total_residential_units END) 
+	AS residential_units_estimate_2015, 
+		(y2040.total_job_spaces-
+		CASE WHEN t1.total_job_spaces 
+			IS NULL THEN 0 ELSE 
+			t1.total_job_spaces END) 
+	AS job_spaces_estimate_2015
+	--y2040.Acres-t1.Acres as acres_estimate_2015,
+FROM            
+	UrbanSim.Alt_4_2040_parcels_in_tpas_units_and_jobs AS y2040 LEFT JOIN 
+	UrbanSim.Alt_3_Counties_TPAs_Density as t1 ON t1.parcel_id = y2040.parcel_id
+Go
 
+DROP view UrbanSim.Alt_5_2015_and_2040_parcel_units_and_jobs_in_tpas_by_parcel;
+GO
+create view UrbanSim.Alt_5_2015_and_2040_parcel_units_and_jobs_in_tpas_by_parcel as
+SELECT
+	y2040.parcel_id,
+	y2040.COUNTY_ID,
+	y2040.Acres,
+	y2040.total_residential_units as residential_units_estimate_2040,
+	y2040.total_job_spaces as job_spaces_estimate_2040,
+		(y2040.total_residential_units-
+		CASE WHEN t1.total_residential_units 
+			IS NULL THEN 0 ELSE 
+			t1.total_residential_units END) 
+	AS residential_units_estimate_2015, 
+		(y2040.total_job_spaces-
+		CASE WHEN t1.total_job_spaces 
+			IS NULL THEN 0 ELSE 
+			t1.total_job_spaces END) 
+	AS job_spaces_estimate_2015
+	--y2040.Acres-t1.Acres as acres_estimate_2015,
+FROM            
+	UrbanSim.Alt_4_2040_parcels_in_tpas_units_and_jobs AS y2040 LEFT JOIN 
+	UrbanSim.Alt_5_Counties_TPAs_Density as t1 ON t1.parcel_id = y2040.parcel_id
+Go
+
+DROP view UrbanSim.Alt_1_2015_and_2040_parcel_units_and_jobs_in_tpas_by_parcel;
+GO
+create view UrbanSim.Alt_1_2015_and_2040_parcel_units_and_jobs_in_tpas_by_parcel as
+SELECT
+	y2040.parcel_id,
+	y2040.COUNTY_ID,
+	y2040.Acres,
+	y2040.total_residential_units as residential_units_estimate_2040,
+	y2040.total_job_spaces as job_spaces_estimate_2040,
+		(y2040.total_residential_units-
+		CASE WHEN t1.total_residential_units 
+			IS NULL THEN 0 ELSE 
+			t1.total_residential_units END) 
+	AS residential_units_estimate_2015, 
+		(y2040.total_job_spaces-
+		CASE WHEN t1.total_job_spaces 
+			IS NULL THEN 0 ELSE 
+			t1.total_job_spaces END) 
+	AS job_spaces_estimate_2015
+	--y2040.Acres-t1.Acres as acres_estimate_2015,
+FROM            
+	UrbanSim.Alt_4_2040_parcels_in_tpas_units_and_jobs AS y2040 LEFT JOIN 
+	UrbanSim.Alt_1_Counties_TPAs_Density as t1 ON t1.parcel_id = y2040.parcel_id
+Go
 
 -----------------------
 ---county summary tables
@@ -505,38 +614,48 @@ Go
 DROP VIEW UrbanSim.Alt_4_Density_Within_TPAS_By_County;
 GO
 CREATE VIEW UrbanSim.Alt_4_Density_Within_TPAS_By_County AS
-SELECT COUNTYNAME, SUM(t1.total_residential_units) AS sum_total_residential_units, 
-				   SUM(t1.total_job_spaces) AS sum_total_job_spaces, 
-	               SUM(t1.Acres) AS sum_Acres  
-FROM UrbanSim.Alt_4_Counties_TPAs_Density_Distinct as t1
-GROUP BY COUNTYNAME;
+SELECT COUNTY_ID, SUM(t1.residential_units_estimate_2015) AS sum_residential_units_estimate_2015, 
+				   SUM(t1.job_spaces_estimate_2015) AS sum_job_spaces_estimate_2015,
+				   SUM(t1.residential_units_estimate_2040) AS sum_residential_units_estimate_2040, 
+				   SUM(t1.job_spaces_estimate_2040) AS sum_job_spaces_estimate_2040, 
+	               SUM(t1.Acres) AS sum_acres  
+FROM UrbanSim.Alt_4_2015_and_2040_parcel_units_and_jobs_in_tpas_by_parcel as t1
+GROUP BY COUNTY_ID;
 GO
 DROP VIEW UrbanSim.Alt_3_Density_Within_TPAS_By_County;
 GO
 CREATE VIEW UrbanSim.Alt_3_Density_Within_TPAS_By_County AS
-SELECT COUNTYNAME, SUM(t1.total_residential_units) AS sum_total_residential_units, 
-				   SUM(t1.total_job_spaces) AS sum_total_job_spaces, 
-	               SUM(t1.Acres) AS sum_Acres  
-FROM UrbanSim.Alt_3_Counties_TPAs_Density_Distinct as t1
-GROUP BY COUNTYNAME;
+SELECT COUNTY_ID, SUM(t1.residential_units_estimate_2015) AS sum_residential_units_estimate_2015, 
+				   SUM(t1.job_spaces_estimate_2015) AS sum_job_spaces_estimate_2015,
+				   SUM(t1.residential_units_estimate_2040) AS sum_residential_units_estimate_2040, 
+				   SUM(t1.job_spaces_estimate_2040) AS sum_job_spaces_estimate_2040, 
+	               SUM(t1.Acres) AS sum_acres
+FROM UrbanSim.Alt_3_2015_and_2040_parcel_units_and_jobs_in_tpas_by_parcel as t1
+GROUP BY COUNTY_ID;
 GO
 DROP VIEW UrbanSim.Alt_5_Density_Within_TPAS_By_County;
 GO
 CREATE VIEW UrbanSim.Alt_5_Density_Within_TPAS_By_County AS
-SELECT COUNTYNAME, SUM(t1.total_residential_units) AS sum_total_residential_units, 
-				   SUM(t1.total_job_spaces) AS sum_total_job_spaces, 
-	               SUM(t1.Acres) AS sum_Acres  
-FROM UrbanSim.Alt_5_Counties_TPAs_Density_Distinct as t1
-GROUP BY COUNTYNAME;
+SELECT COUNTY_ID, SUM(t1.residential_units_estimate_2015) AS sum_residential_units_estimate_2015, 
+				   SUM(t1.job_spaces_estimate_2015) AS sum_job_spaces_estimate_2015,
+				   SUM(t1.residential_units_estimate_2040) AS sum_residential_units_estimate_2040, 
+				   SUM(t1.job_spaces_estimate_2040) AS sum_job_spaces_estimate_2040, 
+	               SUM(t1.Acres) AS sum_acres  
+FROM UrbanSim.Alt_5_2015_and_2040_parcel_units_and_jobs_in_tpas_by_parcel as t1
+GROUP BY COUNTY_ID;
 GO
 DROP VIEW UrbanSim.Alt_1_Density_Within_TPAS_By_County;
 GO
 CREATE VIEW UrbanSim.Alt_1_Density_Within_TPAS_By_County AS
-SELECT COUNTYNAME, SUM(t1.total_residential_units) AS sum_total_residential_units, 
-				   SUM(t1.total_job_spaces) AS sum_total_job_spaces, 
-	               SUM(t1.Acres) AS sum_Acres  
-FROM UrbanSim.Alt_1_Counties_TPAs_Density_Distinct as t1
-GROUP BY COUNTYNAME;
+SELECT COUNTY_ID, SUM(t1.residential_units_estimate_2015) AS sum_residential_units_estimate_2015, 
+				   SUM(t1.job_spaces_estimate_2015) AS sum_job_spaces_estimate_2015,
+				   SUM(t1.residential_units_estimate_2040) AS sum_residential_units_estimate_2040, 
+				   SUM(t1.job_spaces_estimate_2040) AS sum_job_spaces_estimate_2040, 
+	               SUM(t1.Acres) AS sum_acres  
+FROM UrbanSim.Alt_1_2015_and_2040_parcel_units_and_jobs_in_tpas_by_parcel as t1
+GROUP BY COUNTY_ID;
+
+----NEXT, create a summary view of all tables and check the numbers and update the below
 
 --Convert Negatives to Zeros
 ----
@@ -544,31 +663,49 @@ GROUP BY COUNTYNAME;
 DROP VIEW UrbanSim.Alt_4_Density_Within_TPAS_By_County_No_Zero;
 GO
 CREATE VIEW UrbanSim.Alt_4_Density_Within_TPAS_By_County_No_Zero AS
-SELECT COUNTYNAME, CASE WHEN t1.sum_total_residential_units < 0 THEN 0 ELSE t1.sum_total_residential_units END AS sum_total_residential_units, 
-				   CASE WHEN t1.sum_total_job_spaces < 0 THEN 0 ELSE t1.sum_total_job_spaces END AS sum_total_job_spaces, 
-	               CASE WHEN t1.sum_Acres < 0 THEN 0 ELSE t1.sum_Acres END AS sum_Acres  
-FROM UrbanSim.Alt_4_Density_Within_TPAS_By_County as t1;
+SELECT COUNTYNAME, CASE WHEN t1.sum_residential_units_estimate_2015 > t1.sum_residential_units_estimate_2040 THEN t1.sum_residential_units_estimate_2015 ELSE t1.sum_residential_units_estimate_2040 END AS sum_residential_units_estimate_2040, 
+				   t1.sum_job_spaces_estimate_2015 AS sum_job_spaces_estimate_2015, 
+				   t1.sum_residential_units_estimate_2015 AS sum_residential_units_estimate_2015, 
+				   CASE WHEN t1.sum_job_spaces_estimate_2040 < t1.sum_job_spaces_estimate_2015 THEN t1.sum_job_spaces_estimate_2015 ELSE t1.sum_job_spaces_estimate_2040 END AS sum_job_spaces_estimate_2040, 
+	               CASE WHEN t1.sum_acres < 0 THEN 0 ELSE t1.sum_acres END AS sum_acres  
+FROM UrbanSim.Alt_4_Density_Within_TPAS_By_County as t1 INNER JOIN
+dbo.Counties as t2 ON 
+t1.COUNTY_ID = t2.CountyFIP;
 GO
 DROP VIEW UrbanSim.Alt_3_Density_Within_TPAS_By_County_No_Zero;
 GO
 CREATE VIEW UrbanSim.Alt_3_Density_Within_TPAS_By_County_No_Zero AS
-SELECT COUNTYNAME, CASE WHEN t1.sum_total_residential_units < 0 THEN 0 ELSE t1.sum_total_residential_units END AS sum_total_residential_units, 
-				   CASE WHEN t1.sum_total_job_spaces < 0 THEN 0 ELSE t1.sum_total_job_spaces END AS sum_total_job_spaces, 
-	               CASE WHEN t1.sum_Acres < 0 THEN 0 ELSE t1.sum_Acres END AS sum_Acres  
-FROM UrbanSim.Alt_3_Density_Within_TPAS_By_County as t1;
+SELECT COUNTYNAME, CASE WHEN t1.sum_residential_units_estimate_2015 > t1.sum_residential_units_estimate_2040 THEN t1.sum_residential_units_estimate_2015 ELSE t1.sum_residential_units_estimate_2040 END AS sum_residential_units_estimate_2040, 
+				   t1.sum_job_spaces_estimate_2015 AS sum_job_spaces_estimate_2015, 
+				   t1.sum_residential_units_estimate_2015 AS sum_residential_units_estimate_2015, 
+				   CASE WHEN t1.sum_job_spaces_estimate_2040 < t1.sum_job_spaces_estimate_2015 THEN t1.sum_job_spaces_estimate_2015 ELSE t1.sum_job_spaces_estimate_2040 END AS sum_job_spaces_estimate_2040, 
+	               CASE WHEN t1.sum_acres < 0 THEN 0 ELSE t1.sum_acres END AS sum_acres  
+FROM UrbanSim.Alt_3_Density_Within_TPAS_By_County as t1 INNER JOIN
+dbo.Counties as t2 ON 
+t1.COUNTY_ID = t2.CountyFIP;
 GO
 DROP VIEW UrbanSim.Alt_5_Density_Within_TPAS_By_County_No_Zero;
 GO
 CREATE VIEW UrbanSim.Alt_5_Density_Within_TPAS_By_County_No_Zero AS
-SELECT COUNTYNAME, CASE WHEN t1.sum_total_residential_units < 0 THEN 0 ELSE t1.sum_total_residential_units END AS sum_total_residential_units, 
-				   CASE WHEN t1.sum_total_job_spaces < 0 THEN 0 ELSE t1.sum_total_job_spaces END AS sum_total_job_spaces, 
-	               CASE WHEN t1.sum_Acres < 0 THEN 0 ELSE t1.sum_Acres END AS sum_Acres  
-FROM UrbanSim.Alt_5_Density_Within_TPAS_By_County as t1;
+SELECT COUNTYNAME, CASE WHEN t1.sum_residential_units_estimate_2015 > t1.sum_residential_units_estimate_2040 THEN t1.sum_residential_units_estimate_2015 ELSE t1.sum_residential_units_estimate_2040 END AS sum_residential_units_estimate_2040, 
+				   t1.sum_job_spaces_estimate_2015 AS sum_job_spaces_estimate_2015, 
+				   t1.sum_residential_units_estimate_2015 AS sum_residential_units_estimate_2015, 
+				   CASE WHEN t1.sum_job_spaces_estimate_2040 < t1.sum_job_spaces_estimate_2015 THEN t1.sum_job_spaces_estimate_2015 ELSE t1.sum_job_spaces_estimate_2040 END AS sum_job_spaces_estimate_2040, 
+	               CASE WHEN t1.sum_acres < 0 THEN 0 ELSE t1.sum_acres END AS sum_acres  
+FROM UrbanSim.Alt_5_Density_Within_TPAS_By_County as t1 INNER JOIN
+dbo.Counties as t2 ON 
+t1.COUNTY_ID = t2.CountyFIP;
 GO
 DROP VIEW UrbanSim.Alt_1_Density_Within_TPAS_By_County_No_Zero;
 GO
 CREATE VIEW UrbanSim.Alt_1_Density_Within_TPAS_By_County_No_Zero AS
-SELECT COUNTYNAME, CASE WHEN t1.sum_total_residential_units < 0 THEN 0 ELSE t1.sum_total_residential_units END AS sum_total_residential_units, 
-				   CASE WHEN t1.sum_total_job_spaces < 0 THEN 0 ELSE t1.sum_total_job_spaces END AS sum_total_job_spaces, 
-	               CASE WHEN t1.sum_Acres < 0 THEN 0 ELSE t1.sum_Acres END AS sum_Acres  
-FROM UrbanSim.Alt_1_Density_Within_TPAS_By_County as t1;
+SELECT COUNTYNAME, CASE WHEN t1.sum_residential_units_estimate_2015 > t1.sum_residential_units_estimate_2040 THEN t1.sum_residential_units_estimate_2015 ELSE t1.sum_residential_units_estimate_2040 END AS sum_residential_units_estimate_2040, 
+				   t1.sum_job_spaces_estimate_2015 AS sum_job_spaces_estimate_2015, 
+				   t1.sum_residential_units_estimate_2015 AS sum_residential_units_estimate_2015, 
+				   CASE WHEN t1.sum_job_spaces_estimate_2040 < t1.sum_job_spaces_estimate_2015 THEN t1.sum_job_spaces_estimate_2015 ELSE t1.sum_job_spaces_estimate_2040 END AS sum_job_spaces_estimate_2040, 
+	               CASE WHEN t1.sum_acres < 0 THEN 0 ELSE t1.sum_acres END AS sum_acres  
+FROM UrbanSim.Alt_1_Density_Within_TPAS_By_County as t1 INNER JOIN
+dbo.Counties as t2 ON 
+t1.COUNTY_ID = t2.CountyFIP;
+
+
