@@ -85,4 +85,25 @@ FROM
 	UrbanSim.TAZ as t2 on t1.taz_id = t2.taz1454
 WHERE 
 	t1.avg_units_per_acre > 20
-	AND t1.avg_far>0.75
+	AND t1.avg_far>0.75;
+
+GO
+
+SELECT q1.* INTO UrbanSim.TAZ_CEQA_POTENTIAL_SP_CLIP FROM (
+SELECT
+	cqtaz.taz_id as taz_id,
+	tpa.shape.STIntersection(cqtaz.shape) as shape
+FROM 
+	UrbanSim.TAZ_CEQA_POTENTIAL_SP as cqtaz,
+	Transportation.TPAS_2016 as tpa) q1;
+
+GO
+
+SELECT q2.* INTO UrbanSim.TAZ_CEQA_POTENTIAL_FAR_SP_CLIP FROM (
+SELECT
+	cqtaz.taz_id as taz_id,
+	tpa.shape.STIntersection(cqtaz.shape) as shape
+FROM 
+	UrbanSim.TAZ_CEQA_POTENTIAL_FAR_SP as cqtaz,
+	Transportation.TPAS_2016 as tpa) q2;
+
