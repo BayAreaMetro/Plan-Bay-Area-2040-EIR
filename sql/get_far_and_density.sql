@@ -18,18 +18,6 @@ SELECT  b.parcel_id,
 --need to add units/acre
 --then group by taz_id and average
 
-ALTER TABLE UrbanSim.Parcels ADD acres NUMERIC(15,2) NULL;  
-
-GO
-UPDATE
-    t1
-SET
-    t1.acres = Round(t1.shape.STArea()*0.000247105381,2)
-FROM
-    UrbanSim.Parcels AS t1;
-
-GO
-
 CREATE VIEW UrbanSim.Parcels_FAR_Units_Per_Acre AS
 SELECT  (CASE WHEN p.acres = 0 THEN NULL 
 			ELSE b.estimated_residential_square_feet /  
