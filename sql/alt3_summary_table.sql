@@ -11,23 +11,28 @@ COUNTIES_TPAS_ALT_3_OVERLAY;
 Go 
 --Calc the following 
 --regional total acres 
-select 
-CountyName, 
-Cast(Sum(Acres) as numeric(18,0)) as Total_Acres 
-From UrbanSim.Counties_TPAs_Alt_3_Overlay_DataSummary 
-Group By CountyName 
-Order By CountyName select CountyName, 
-Cast(Sum(Acres) as numeric(18,0)) as Total_Acres_Class_3 
-From UrbanSim.Counties_TPAs_Alt_3_Overlay_DataSummary 
-Where Summary_Class = 'Class_3' 
-Group By CountyName 
-Order By CountyName; 
-
-GO
-
-select CountyName, 
-Cast(Sum(Acres) as numeric(18,0)) as Total_Acres_Class_4 
-From UrbanSim.Counties_TPAs_Alt_3_Overlay_DataSummary 
-Where Summary_Class = 'Class_4' 
-Group By CountyName 
+SELECT t.CountyName, 
+       t.Total_Acres Total_Acres,
+       c3.Total_Acres_Class_3 Class_3_Acres,
+       c4.Total_Acres_Class_4 Class_4_Acres
+FROM 
+	(SELECT  CountyName,
+		Cast(Sum(Acres) as numeric(18,0)) as Total_Acres 
+		FROM UrbanSim.Counties_TPAs_Alt_3_Overlay_DataSummary t
+		Group By t.CountyName) t
+JOIN 
+	(   select CountyName,
+		Cast(Sum(Acres) as numeric(18,0)) as Total_Acres_Class_3 
+		From UrbanSim.Counties_TPAs_Alt_3_Overlay_DataSummary 
+		Where Summary_Class = 'Class_3' 
+		Group By CountyName 
+	) c3 ON t.CountyName = c3.CountyName
+JOIN 
+	(   select CountyName, 
+		Cast(Sum(Acres) as numeric(18,0)) as Total_Acres_Class_4 
+		From UrbanSim.Counties_TPAs_Alt_3_Overlay_DataSummary 
+		Where Summary_Class = 'Class_4' 
+		Group By CountyName
+	) c4 
+  ON t.CountyName = c4.CountyName 
 Order By CountyName; 
