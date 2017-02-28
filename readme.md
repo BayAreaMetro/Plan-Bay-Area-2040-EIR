@@ -4,7 +4,7 @@ The goal of this repository is to output summary tables and geospatial feature c
 
 ##Data Sources
 
-Data used in this repository is mainly sourced from the outputs MTC's implementation of UrbanSim, as found [here](https://github.com/MetropolitanTransportationCommission/bayarea_urbansim).   
+Data used in this repository is mainly sourced from the outputs MTC's implementation of [UrbanSim](https://github.com/MetropolitanTransportationCommission/bayarea_urbansim).   
 
 ##Folders  
 
