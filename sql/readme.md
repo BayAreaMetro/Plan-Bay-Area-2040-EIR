@@ -2,6 +2,10 @@
 
 Rough take on what the SQL scripts do.  
 
+###eir_summary_tables  
+
+Output summaries of acres in Transit Priority Areas and the estimated growth 'footprint' by county for the EIR. Footprint has a particular meaning defined in the query but generally means locations where housing or employment changes are estimates to occur.   
+
 ###AddSummaryClassDescription.sql    
 
 Output tables summarizing housing and/or employment change in Transit Priority Areas and Priority Development Areas in various scenarios (e.g. land use model run 7224c, etc)
