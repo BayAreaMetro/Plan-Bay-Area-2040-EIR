@@ -79,5 +79,7 @@ END
 CLOSE @Cursor; 
 DEALLOCATE @Cursor; 
 
-DROP TABLE #TomTom_TableNames
-PRINT 'Dropped temporary table' 
+DROP TABLE #RUN_NUMBERS
+DROP TABLE #COUNTY_ID_TM_MAP
+PRINT 'Dropped temporary tables' 
+
