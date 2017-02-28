@@ -6,7 +6,7 @@ Rough take on what the SQL scripts do.
 
 Output tables summarizing housing and/or employment change in Transit Priority Areas and Priority Development Areas in Alternative 4 (aka land use model run 7224c)
 
-###[eir_summary_tables directory](https://github.com/MetropolitanTransportationCommission/UrbanSim_Spatial_Analysis/tree/master/sql/sql/eir_summary_tables)
+###[eir_summary_tables directory](https://github.com/MetropolitanTransportationCommission/UrbanSim_Spatial_Analysis/tree/master/sql/eir_summary_tables)
 
 Output summaries of acres in Transit Priority Areas and the estimated growth 'footprint' by county for the EIR for all scenarios/alternatives. Footprint has a particular meaning defined in the query but generally means locations where housing or employment changes are estimates to occur.   
 
