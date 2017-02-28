@@ -4,12 +4,24 @@ Rough take on what the SQL scripts do.
 
 ###AddSummaryClassDescription.sql    
 
-Output a table summarizing land use change in Transit Priority Areas and Priority Development Areas.  
+Output tables summarizing housing and/or employment change in Transit Priority Areas and Priority Development Areas in various scenarios (e.g. land use model run 7224c, etc)
 
 ###Build_Alternative_4_Footprint_2015_thru_2040.sql   
 
-Output the footprint of growth from 2015 to 2040 for the EIR Analysis.  
+Output the 'footprint' of growth from 2015 to 2040 for the EIR Analysis.  Footprint has a particular meaning defined in the query but generally means locations where housing or employment changes are estimates to occur. 
 
 ###CreateDensityByCounty_TPA.sql   
 
 Output a table of Land Use density by Transit Priority Areas.  
+
+###get_far_and_density.sql  
+
+Output the feature class geometry for the 2017 version of Map 7 - Transit Priority Project CEQA Streamlining (PBA '13)   
+
+###parcels_setup.sql  
+
+Used to setup (index, etc) a parcels table if necessary.
+  
+
+
+
