@@ -20,6 +20,10 @@ This is where output files structured as documents (PDFs) live.
 
 These SQL scripts are used to summarize Land Use data. Please see the README in that folder for further documentation.  
 
+###[esri](https://github.com/MetropolitanTransportationCommission/UrbanSim_Spatial_Analysis/tree/master/esri)   
+
+SDE connections, Pro documents, and Toolboxes live here.  
+
 ###UrbanSim_Alternatives_Analysis.gdb
 
 This file was part of the output process for some of the feature classes. It seems that GitHub can't version this file type.       
