@@ -24,10 +24,6 @@ These SQL scripts are used to summarize Land Use data. Please see the README in 
 
 SDE connections, Pro documents, and Toolboxes live here.  
 
-###UrbanSim_Alternatives_Analysis.gdb
-
-This file was part of the output process for some of the feature classes. It seems that GitHub can't version this file type.       
-
 ##Result  
 
 In the EIR Database. Please contact MTC GIS for details.   
