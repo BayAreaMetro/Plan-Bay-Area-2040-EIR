@@ -20,24 +20,32 @@ Go
 --Calc the following 
 --regional total acres 
 SELECT t.CountyName, 
-       t.Total_Acres Total_Acres,
-       c3.Total_Acres_Class_3 Class_3_Acres,
-       c4.Total_Acres_Class_4 Class_4_Acres
+       t.Total Total,
+	   c2.In_TPAs C2_In_TPAs,
+       c3.In_Growth_Footprint_and_not_in_TPA C3_In_Growth_Footprint_and_not_in_TPA,
+       c4.In_Growth_Footprint_and_in_TPA C4_In_Growth_Footprint_and_in_TPA
 FROM 
 	(SELECT  CountyName,
-		Cast(Sum(Acres) as numeric(18,0)) as Total_Acres 
+		Cast(Sum(Acres) as numeric(18,0)) as Total 
 		FROM UrbanSim.Counties_TPAs_Alt_0_Overlay_DataSummary t
 		Group By t.CountyName) t
-JOIN 
+LEFT JOIN 
 	(   select CountyName,
-		Cast(Sum(Acres) as numeric(18,0)) as Total_Acres_Class_3 
+		Cast(Sum(Acres) as numeric(18,0)) as In_TPAs
+		From UrbanSim.Counties_TPAs_Alt_0_Overlay_DataSummary 
+		Where Summary_Class = 'Class_2' 
+		Group By CountyName 
+	) c2 ON t.CountyName = c2.CountyName
+LEFT JOIN 
+	(   select CountyName,
+		Cast(Sum(Acres) as numeric(18,0)) as In_Growth_Footprint_and_not_in_TPA
 		From UrbanSim.Counties_TPAs_Alt_0_Overlay_DataSummary 
 		Where Summary_Class = 'Class_3' 
 		Group By CountyName 
 	) c3 ON t.CountyName = c3.CountyName
-JOIN 
+LEFT JOIN 
 	(   select CountyName, 
-		Cast(Sum(Acres) as numeric(18,0)) as Total_Acres_Class_4 
+		Cast(Sum(Acres) as numeric(18,0)) as In_Growth_Footprint_and_in_TPA
 		From UrbanSim.Counties_TPAs_Alt_0_Overlay_DataSummary 
 		Where Summary_Class = 'Class_4' 
 		Group By CountyName
