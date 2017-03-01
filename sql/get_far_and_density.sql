@@ -85,6 +85,27 @@ GROUP BY
 	taz_id;
 
 
+create view UrbanSim.TAZ_CEQA_POTENTIAL_ALL_VARS as
+SELECT
+	t1.taz_id,
+	t1.avg_far,
+	t1.avg_units_per_acre,
+	t1.stdev_far,
+	t1.stdev_units_per_acre,
+	t1.max_far,
+	t1.max_units_per_acre,
+	t1.min_far,
+	t1.min_units_per_acre,
+	t1.cutoff_far_estimate,
+	t1.cutoff_units_per_acre,
+	t2.shape
+FROM 
+	UrbanSim.TAZ_CEQA_POTENTIAL as t1 JOIN
+	UrbanSim.TAZ as t2 on t1.taz_id = t2.taz1454
+GROUP BY 
+	taz_id;
+
+
 GO
 
 create view UrbanSim.TAZ_CEQA_POTENTIAL_UNITS_SP as
