@@ -55,7 +55,6 @@ GO
 CREATE VIEW UrbanSim.Parcels_FAR_Units_Per_Acre_Non_Zero AS
 SELECT  far_estimate,
 		units_per_acre,
-		residential_commercial_ratio,
 		estimated_residential_square_feet,
 		PARCEL_ID,
 		tpa_objectid,
@@ -65,11 +64,19 @@ SELECT  far_estimate,
   		WHERE units_per_acre > 0;
 
 
-create view UrbanSim.TAZ_CEQA_POTENTIAL_Temp as
+create view UrbanSim.TAZ_CEQA_POTENTIAL as
 SELECT
 	taz_id,
 	avg(far_estimate) as avg_far,
-	avg(units_per_acre) as avg_units_per_acre
+	avg(units_per_acre) as avg_units_per_acre,
+	stdev(far_estimate) as stdev_far,
+	stdev(units_per_acre) as stdev_units_per_acre,
+	max(far_estimate) as max_far,
+	max(units_per_acre) as max_units_per_acre,
+	min(far_estimate) as min_far,
+	min(units_per_acre) as min_units_per_acre,
+	(AVG(far_estimate) + STDEV(far_estimate)*1.27) as cutoff_far_estimate,
+	(AVG(units_per_acre) + STDEV(units_per_acre)*1.27) as cutoff_units_per_acre
 FROM 
 	UrbanSim.Parcels_FAR_Units_Per_Acre_Non_Zero
 WHERE 
@@ -77,21 +84,25 @@ WHERE
 GROUP BY 
 	taz_id;
 
+
 GO
 
-create view UrbanSim.TAZ_CEQA_POTENTIAL_SP_Temp as
+create view UrbanSim.TAZ_CEQA_POTENTIAL_UNITS_SP as
 SELECT
 	t1.taz_id,
 	t1.avg_far,
 	t1.avg_units_per_acre,
 	t2.shape
 FROM 
-	UrbanSim.TAZ_CEQA_POTENTIAL_Temp as t1 JOIN
-	UrbanSim.TAZ as t2 on t1.taz_id = t2.taz1454;
+	UrbanSim.TAZ_CEQA_POTENTIAL as t1 JOIN
+	UrbanSim.TAZ as t2 on t1.taz_id = t2.taz1454
+WHERE	
+	t1.cutoff_units_per_acre > 20
+;
 
 GO
 
-create view UrbanSim.TAZ_CEQA_POTENTIAL_FAR_SP as
+create view UrbanSim.TAZ_CEQA_POTENTIAL_FAR_AND_UNITS_SP as
 SELECT
 	t1.taz_id,
 	t1.avg_far,
@@ -101,8 +112,8 @@ FROM
 	UrbanSim.TAZ_CEQA_POTENTIAL as t1 JOIN
 	UrbanSim.TAZ as t2 on t1.taz_id = t2.taz1454
 WHERE 
-	t1.avg_units_per_acre > 20
-	AND t1.avg_far>0.75;
+	t1.cutoff_units_per_acre > 20
+	AND t1.cutoff_far_estimate> 0.75;
 
 GO
 
