@@ -21,7 +21,7 @@ SELECT  (CASE WHEN p.acres = 0 THEN NULL
 		(CASE WHEN p.acres = 0 THEN NULL 
 			ELSE Y2040.total_residential_units/p.acres 
 			END) as units_per_acre,
-		pb.estimated_residential_square_feet,
+		pb.estimated_residential_square_feet as est_res_sq_ft,
 		p.PARCEL_ID,
 		p.tpa_objectid,
 		p.taz_id,
@@ -29,7 +29,6 @@ SELECT  (CASE WHEN p.acres = 0 THEN NULL
   FROM  DEIR2017.UrbanSim.Parcels_Building_Square_Footage as pb JOIN
 		DEIR2017.UrbanSim.Parcels as p ON pb.parcel_id = p.parcel_id JOIN
 		UrbanSim.RUN7224_PARCEL_DATA_2040 AS y2040 ON p.PARCEL_ID = y2040.parcel_id;
-
 GO
 
 create view UrbanSim.Parcels_FAR_Units_Per_Acre_SP as
@@ -63,11 +62,13 @@ SELECT  far_estimate,
   FROM  DEIR2017.UrbanSim.Parcels_FAR_Units_Per_Acre
   		WHERE units_per_acre > 0;
 
+GO
 
 create view UrbanSim.TAZ_CEQA_POTENTIAL as
 SELECT
 	taz_id,
 	avg(far_estimate) as avg_far,
+	count(*) as observations,
 	avg(units_per_acre) as avg_units_per_acre,
 	stdev(far_estimate) as stdev_far,
 	stdev(units_per_acre) as stdev_units_per_acre,
@@ -84,11 +85,13 @@ WHERE
 GROUP BY 
 	taz_id;
 
+GO
 
 create view UrbanSim.TAZ_CEQA_POTENTIAL_ALL_VARS as
 SELECT
 	t1.taz_id,
 	t1.avg_far,
+	t1.observations,
 	t1.avg_units_per_acre,
 	t1.stdev_far,
 	t1.stdev_units_per_acre,
@@ -101,10 +104,28 @@ SELECT
 	t2.shape
 FROM 
 	UrbanSim.TAZ_CEQA_POTENTIAL as t1 JOIN
-	UrbanSim.TAZ as t2 on t1.taz_id = t2.taz1454
-GROUP BY 
-	taz_id;
+	UrbanSim.TAZ as t2 on t1.taz_id = t2.taz1454;
 
+GO
+
+create view UrbanSim.TAZ_CEQA_POTENTIAL_ALL_VARS_TPA_2016_CLIP as
+SELECT
+	t1.taz_id,
+	t1.avg_far,
+	t1.observations,
+	t1.avg_units_per_acre,
+	t1.stdev_far,
+	t1.stdev_units_per_acre,
+	t1.max_far,
+	t1.max_units_per_acre,
+	t1.min_far,
+	t1.min_units_per_acre,
+	t1.cutoff_far_estimate,
+	t1.cutoff_units_per_acre,
+	tpa.SHAPE.STIntersection(t2.shape) AS shape
+FROM  UrbanSim.TAZ_CEQA_POTENTIAL AS t1 INNER JOIN
+ UrbanSim.TAZ AS t2 ON t1.taz_id = t2.taz1454 CROSS JOIN
+ Transportation.TPAS_2016 AS tpa;
 
 GO
 
