@@ -76,7 +76,7 @@ It was more expedient to use Pandas to apply the quantile analysis, so we follow
 
 The output of the 3rd round is a set of feature classes, each of which is subset to a given quintile threshold. 
 
-The naming convention for these feature classes is:
+The naming convention for these feature classes, [here](http://mtc.maps.arcgis.com/home/item.html?id=46a5f6b4c0c44bf6b529daa157ce8be8), is:
 
 `far_sp_q8` - a subset of all TAZ's in which the FAR is over the .75 CEQA threshold for the 80th percentile (quartile). 
 
