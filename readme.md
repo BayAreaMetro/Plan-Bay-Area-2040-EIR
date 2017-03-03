@@ -74,6 +74,8 @@ It was more expedient to use Pandas to apply the quantile analysis, so we follow
 
 3) load those CSV's back to a FileGDB with TAZ geometries. AGOL link to data [here](http://mtc.maps.arcgis.com/home/item.html?id=0d4c83530b9f4039a09a497b28e2a386). (`load_taz_quantile_data.bat`, `join_taz_quantiles_to_shapes.bat`)
 
+#####Naming comventions in 3rd map version
+
 The output of the 3rd round is a set of feature classes, each of which is subset to a given quintile threshold. 
 
 The naming convention for these feature classes, [here](http://mtc.maps.arcgis.com/home/item.html?id=46a5f6b4c0c44bf6b529daa157ce8be8), is:
