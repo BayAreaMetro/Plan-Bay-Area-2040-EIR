@@ -76,7 +76,7 @@ It was more expedient to use Pandas to apply the quantile analysis, so we follow
 
 #####Naming comventions in 3rd map version
 
-The output of the 3rd round is a set of feature classes, each of which is subset to a given quintile threshold. 
+The output of the 3rd round is a set of feature classes, each of which is subset to a given quartile threshold. 
 
 The naming convention for these feature classes, [here](http://mtc.maps.arcgis.com/home/item.html?id=46a5f6b4c0c44bf6b529daa157ce8be8), is:
 
