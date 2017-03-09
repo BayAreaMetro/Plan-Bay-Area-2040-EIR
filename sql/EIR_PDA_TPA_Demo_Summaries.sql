@@ -24,14 +24,14 @@ Summarize demographic data for run7224 2015 (Baseline)
 USE [DEIR2017]
 GO
 
-SELECT  *
+SELECT  
 	t2.COUNTY_ID, 
 	t2.tpa_objectid, 
 	t2.pda_objectid, 
-	sum(t1.hhq1 + t1.hhq2 + t1.hhq3 + t1.hhq4) as Households, 
-	(sum(t1.hhq1 + t1.hhq2 + t1.hhq3 + t1.hhq4)* 2.69) AS Population,
-	sum(t1.[AGREMPN] + t1.[MWTEMPN] + t1.[RETEMPN] + t1.[FPSEMPN] + t1.[HEREMPN] + t1.[OTHEMPN]) AS Employment
-FROM dbo.RUN7224_PARCEL_DATA_2015 AS t1 
+	sum(ISNULL(t1.hhq1, 0) + ISNULL(t1.hhq2, 0) + ISNULL(t1.hhq3, 0) + ISNULL(t1.hhq4, 0)) as Households, 
+	(sum(ISNULL(t1.hhq1, 0) + ISNULL(t1.hhq2, 0) + ISNULL(t1.hhq3, 0) + ISNULL(t1.hhq4, 0))* 2.69) AS Population,
+	sum(ISNULL(t1.[AGREMPN], 0) + ISNULL(t1.[MWTEMPN], 0) + ISNULL(t1.[RETEMPN], 0) + ISNULL(t1.[FPSEMPN], 0) + ISNULL(t1.[HEREMPN], 0) + ISNULL(t1.[OTHEMPN], 0)) AS Employment
+FROM [dbo].[RUN7224_PARCEL_DATA_2015] AS t1 
 INNER JOIN UrbanSim.Parcels AS t2 
 ON t1.parcel_id = t2.PARCEL_ID
 group by 
@@ -49,19 +49,13 @@ Summarize demographic data for run7224 2040 (Plan)
 USE [DEIR2017]
 GO
 
-SELECT COUNT(*)
-FROM UrbanSim.RUN7224_PARCEL_DATA_2040
-
-SELECT COUNT(*)
-FROM UrbanSim.Parcels
-
-SELECT *
+SELECT  
 	t2.COUNTY_ID, 
 	t2.tpa_objectid, 
 	t2.pda_objectid, 
-	sum(t1.hhq1 + t1.hhq2 + t1.hhq3 + t1.hhq4) as Households, 
-	(sum(t1.hhq1 + t1.hhq2 + t1.hhq3 + t1.hhq4)* 2.69) AS Population,
-	sum(t1.[AGREMPN] + t1.[MWTEMPN] + t1.[RETEMPN] + t1.[FPSEMPN] + t1.[HEREMPN] + t1.[OTHEMPN]) AS Employment
+	sum(ISNULL(t1.hhq1, 0) + ISNULL(t1.hhq2, 0) + ISNULL(t1.hhq3, 0) + ISNULL(t1.hhq4, 0)) as Households, 
+	(sum(ISNULL(t1.hhq1, 0) + ISNULL(t1.hhq2, 0) + ISNULL(t1.hhq3, 0) + ISNULL(t1.hhq4, 0))* 2.69) AS Population,
+	sum(ISNULL(t1.[AGREMPN], 0) + ISNULL(t1.[MWTEMPN], 0) + ISNULL(t1.[RETEMPN], 0) + ISNULL(t1.[FPSEMPN], 0) + ISNULL(t1.[HEREMPN], 0) + ISNULL(t1.[OTHEMPN], 0)) AS Employment
 FROM UrbanSim.RUN7224_PARCEL_DATA_2040 AS t1 
 INNER JOIN UrbanSim.Parcels AS t2 
 ON t1.parcel_id = t2.PARCEL_ID
@@ -84,9 +78,9 @@ SELECT
 	t2.COUNTY_ID, 
 	t2.tpa_objectid, 
 	t2.pda_objectid, 
-	sum(t1.hhq1 + t1.hhq2 + t1.hhq3 + t1.hhq4) as Households, 
-	(sum(t1.hhq1 + t1.hhq2 + t1.hhq3 + t1.hhq4)* 2.69) AS Population,
-	sum(t1.[AGREMPN] + t1.[MWTEMPN] + t1.[RETEMPN] + t1.[FPSEMPN] + t1.[HEREMPN] + t1.[OTHEMPN]) AS Employment
+	sum(ISNULL(t1.hhq1, 0) + ISNULL(t1.hhq2, 0) + ISNULL(t1.hhq3, 0) + ISNULL(t1.hhq4, 0)) as Households, 
+	(sum(ISNULL(t1.hhq1, 0) + ISNULL(t1.hhq2, 0) + ISNULL(t1.hhq3, 0) + ISNULL(t1.hhq4, 0))* 2.69) AS Population,
+	sum(ISNULL(t1.[AGREMPN], 0) + ISNULL(t1.[MWTEMPN], 0) + ISNULL(t1.[RETEMPN], 0) + ISNULL(t1.[FPSEMPN], 0) + ISNULL(t1.[HEREMPN], 0) + ISNULL(t1.[OTHEMPN], 0)) AS Employment
 FROM [dbo].[RUN10_PARCEL_DATA_2040] AS t1 
 INNER JOIN UrbanSim.Parcels AS t2 
 ON t1.parcel_id = t2.PARCEL_ID
@@ -109,9 +103,9 @@ SELECT
 	t2.COUNTY_ID, 
 	t2.tpa_objectid, 
 	t2.pda_objectid, 
-	sum(t1.hhq1 + t1.hhq2 + t1.hhq3 + t1.hhq4) as Households, 
-	(sum(t1.hhq1 + t1.hhq2 + t1.hhq3 + t1.hhq4)* 2.69) AS Population,
-	sum(t1.[AGREMPN] + t1.[MWTEMPN] + t1.[RETEMPN] + t1.[FPSEMPN] + t1.[HEREMPN] + t1.[OTHEMPN]) AS Employment
+	sum(ISNULL(t1.hhq1, 0) + ISNULL(t1.hhq2, 0) + ISNULL(t1.hhq3, 0) + ISNULL(t1.hhq4, 0)) as Households, 
+	(sum(ISNULL(t1.hhq1, 0) + ISNULL(t1.hhq2, 0) + ISNULL(t1.hhq3, 0) + ISNULL(t1.hhq4, 0))* 2.69) AS Population,
+	sum(ISNULL(t1.[AGREMPN], 0) + ISNULL(t1.[MWTEMPN], 0) + ISNULL(t1.[RETEMPN], 0) + ISNULL(t1.[FPSEMPN], 0) + ISNULL(t1.[HEREMPN], 0) + ISNULL(t1.[OTHEMPN], 0)) AS Employment
 FROM [dbo].[RUN11_PARCEL_DATA_2040] AS t1 
 INNER JOIN UrbanSim.Parcels AS t2 
 ON t1.parcel_id = t2.PARCEL_ID
@@ -134,9 +128,9 @@ SELECT
 	t2.COUNTY_ID, 
 	t2.tpa_objectid, 
 	t2.pda_objectid, 
-	sum(t1.hhq1 + t1.hhq2 + t1.hhq3 + t1.hhq4) as Households, 
-	(sum(t1.hhq1 + t1.hhq2 + t1.hhq3 + t1.hhq4)* 2.69) AS Population,
-	sum(t1.[AGREMPN] + t1.[MWTEMPN] + t1.[RETEMPN] + t1.[FPSEMPN] + t1.[HEREMPN] + t1.[OTHEMPN]) AS Employment
+	sum(ISNULL(t1.hhq1, 0) + ISNULL(t1.hhq2, 0) + ISNULL(t1.hhq3, 0) + ISNULL(t1.hhq4, 0)) as Households, 
+	(sum(ISNULL(t1.hhq1, 0) + ISNULL(t1.hhq2, 0) + ISNULL(t1.hhq3, 0) + ISNULL(t1.hhq4, 0))* 2.69) AS Population,
+	sum(ISNULL(t1.[AGREMPN], 0) + ISNULL(t1.[MWTEMPN], 0) + ISNULL(t1.[RETEMPN], 0) + ISNULL(t1.[FPSEMPN], 0) + ISNULL(t1.[HEREMPN], 0) + ISNULL(t1.[OTHEMPN], 0)) AS Employment
 FROM [dbo].[RUN12_PARCEL_DATA_2040] AS t1 
 INNER JOIN UrbanSim.Parcels AS t2 
 ON t1.parcel_id = t2.PARCEL_ID
@@ -159,9 +153,9 @@ SELECT
 	t2.COUNTY_ID, 
 	t2.tpa_objectid, 
 	t2.pda_objectid, 
-	sum(t1.hhq1 + t1.hhq2 + t1.hhq3 + t1.hhq4) as Households, 
-	(sum(t1.hhq1 + t1.hhq2 + t1.hhq3 + t1.hhq4)* 2.69) AS Population,
-	sum(t1.[AGREMPN] + t1.[MWTEMPN] + t1.[RETEMPN] + t1.[FPSEMPN] + t1.[HEREMPN] + t1.[OTHEMPN]) AS Employment
+	sum(ISNULL(t1.hhq1, 0) + ISNULL(t1.hhq2, 0) + ISNULL(t1.hhq3, 0) + ISNULL(t1.hhq4, 0)) as Households, 
+	(sum(ISNULL(t1.hhq1, 0) + ISNULL(t1.hhq2, 0) + ISNULL(t1.hhq3, 0) + ISNULL(t1.hhq4, 0))* 2.69) AS Population,
+	sum(ISNULL(t1.[AGREMPN], 0) + ISNULL(t1.[MWTEMPN], 0) + ISNULL(t1.[RETEMPN], 0) + ISNULL(t1.[FPSEMPN], 0) + ISNULL(t1.[HEREMPN], 0) + ISNULL(t1.[OTHEMPN], 0)) AS Employment
 FROM [dbo].[RUN17_PARCEL_DATA_2040] AS t1 
 INNER JOIN UrbanSim.Parcels AS t2 
 ON t1.parcel_id = t2.PARCEL_ID
