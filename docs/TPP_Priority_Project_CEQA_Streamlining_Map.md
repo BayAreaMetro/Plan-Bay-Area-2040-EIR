@@ -30,6 +30,8 @@ In reviewing the first round, we found that there were a number of places in whi
 
 So we tried applying a method in which any TAZ in which the 80th percentile (top 20% of the distribution) of parcels might qualify for CEQA would be tagged as a potential CEQA streamlining TAZ. 
 
+Please provide a link/ pull request to the sql code or method used to develop this dataset.
+
 An AGOL Map of the a data of the second round of data is [here](http://mtc.maps.arcgis.com/home/item.html?id=c75f9011843842eb96b64ff28abbb698&jobid=a30452e8-ebd7-4da2-a46e-6a747288637c)   
 
 The feature classes in here include:
@@ -49,6 +51,8 @@ It was more expedient to use Pandas to apply the quantile analysis, so we follow
 2) create CSV's of the values at a set of reasonable quantiles within each TAZ (`calculate_taz_percentile_values.py`)
 
 3) load those CSV's back to a FileGDB with TAZ geometries. AGOL link to data [here](http://mtc.maps.arcgis.com/home/item.html?id=0d4c83530b9f4039a09a497b28e2a386). (`load_taz_quantile_data.bat`, `join_taz_quantiles_to_shapes.bat`)
+
+Kearey's comment: I'd like to explore using R to connect to the database (or even the output csv data) to do this same work.
 
 #####Naming comventions in 3rd map version
 
