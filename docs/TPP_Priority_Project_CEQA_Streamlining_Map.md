@@ -4,6 +4,14 @@ This map is on page 61 in the PBA '13 document. The goal is basically to output 
 
 In creating the feature classes for this map we went through several iterations:
 
+###Current Version
+
+Is available [here](http://arcg.is/XGm5v)
+
+###Background and Previous Versions
+
+Below is a hastily documented version of how we got to the final output
+
 ####First Round  
 
 In this case, we defined the Floor Area Ratio and the Units per Acre for each TAZ as the average over each parcel within each TAZ.   
@@ -56,7 +64,7 @@ The naming convention for these feature classes, [here](http://mtc.maps.arcgis.c
 
 `far_sp_q4_clip_to_uf_and_tpa` is an example of what these TAZ's look like when clipped to TPAs and the Urban Footprint. Below we talk a bit more about why that clipping is necessary. 
 
-#####To do   
+#####Clipping to Urban Footprint
 
 The unit to which we are aggregating (the TAZ) makes sense for modeling, but presents problems cartographically. For example, there is a large TPA in the Presidio by GG Bridge, and a large TAZ there as well. So if we only clip the TAZ summaries to the TPA's, we end up with areas that are unlikely to see CEQA projects.   
 
@@ -67,6 +75,12 @@ You can see an example of what this clipping looks like, along with all of the f
 The clipped feature class is named `far_sp_q4_clip_to_uf_and_tpa`.    
 
 The best next step might be to choose quartile that works and then clip it. Or clip all of the feature classes and then review. 
+
+#####Clipped Output
+
+Is available here:
+
+http://arcg.is/XGm5v
 
 ####Background Data  
 
