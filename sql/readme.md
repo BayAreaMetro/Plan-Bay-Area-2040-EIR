@@ -22,6 +22,20 @@ Output a table of Land Use density by Transit Priority Areas.
 
 Output the feature class geometry for the 2017 version of Map 7 - Transit Priority Project CEQA Streamlining (PBA '13)   
 
+###eir_pda_tpa_demo_summaries.sql  
+ 
+Summarize demographic data produced by UrbanSim for the following geographies:  
+	County  
+	PDA   
+	TPA   
+Utilize UrbanSim output from the following runs:   
+	Run 7224 2015 (Baseline)    
+	Run 7224 2040 (Plan)   
+	Run r10 2040 (No Project)   
+	Run r11 (Main Streets)   
+	Run r12 (Big Cities)  
+	Run r17 (EES)  
+
 ###[parcels_setup.sql](https://github.com/MetropolitanTransportationCommission/UrbanSim_Spatial_Analysis/blob/master/sql/parcels_setup.sql) 
 
 Used to setup (index, etc) a parcels table if necessary.
