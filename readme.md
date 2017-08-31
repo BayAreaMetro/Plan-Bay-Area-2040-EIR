@@ -4,7 +4,9 @@ The goal of this repository is to output summary tables and geospatial feature c
 
 ## Data Sources
 
-Data used in this repository is mainly sourced from the outputs MTC's implementation of [UrbanSim](https://github.com/MetropolitanTransportationCommission/bayarea_urbansim).   
+Data used for the EIR process in general is in a spreadsheet [here](https://mtcdrive.app.box.com/file/203423564244) mapping figures to data sources, metadata, and paths via a data_id, which is based upon the Row_id in the following [smartsheet](https://app.smartsheet.com/b/home?lx=kxHiygtZYYFSoNxKdR-2Ww) that was used to track work for the eir in process. 
+
+Data used in the scripts in this repository is mainly sourced from the outputs MTC's implementation of [UrbanSim](https://github.com/MetropolitanTransportationCommission/bayarea_urbansim).   
 
 ## Folders  
 
