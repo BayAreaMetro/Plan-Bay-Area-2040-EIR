@@ -1,31 +1,43 @@
-## Goal
+# Environmental Impact Report Plan Bay Area 2050
+The purpose of this repository is to document all data work and processes in support of the Environmental Impact Report (EIR) for Plan Bay Area 2050. 
 
-The goal of this repository is to output summary tables and geospatial feature classes in support of Plan Bay Area and the associated Environmental Impact Report. 
+## Project Management 
+
+Add links to:
+- [Asana Project](https://app.asana.com/0/229355710745434/1189349851128091)
+- [EIR Box Directory (Internal Access Only)](https://mtcdrive.box.com/s/bebknhfq4nzhot2vf6mioq36gobxhw8a)
+
+## Table of Contents 
+
+- [EIR Plan Bay Area 2040](PBA2040_EIR.md)
+- [Data Sources](#data-sources)
+	- [Growth Geography Summary Sources](#growth-geography-summary-sources)
+- [Analysis Parameters](#analysis-parameters)
+	- [Growth Geography Summary Parameters](#growth-geography-summary-parameters)
+- [Methodology](#methodology)
+	- [Growth Geography Summary Methods]
+- [Expected Outcomes](#expected-outcomes)
+- [Results](#results)
 
 ## Data Sources
 
-Data used for the EIR process in general is in a (draft) spreadsheet [here](https://mtcdrive.app.box.com/file/203423564244) mapping figures to data sources, metadata, and paths via a data_id, which is based upon the "Row ID" in the following [smartsheet](https://app.smartsheet.com/b/home?lx=kxHiygtZYYFSoNxKdR-2Ww) that was used to track work for the EIR in process. 
+### Growth Geography Summary Sources
 
-Data used in the scripts in this repository is mainly sourced from the outputs MTC's implementation of [UrbanSim](https://github.com/MetropolitanTransportationCommission/bayarea_urbansim).   
+- [Plan Bay Area 2050 Growth Geographies (Internal Access Only)](https://arcgis.ad.mtc.ca.gov/portal/home/item.html?id=3922afc70d3a4475a98e6ae9973f2bfb)
+- [Transit Priority Areas (Not yet linked)]()
 
-## Folders  
+## Analysis Parameters
 
-### [data](https://github.com/MetropolitanTransportationCommission/UrbanSim_Spatial_Analysis/tree/master/data)  
+### Growth Geography Summary Parameters
 
-This is where Extract, Transform, and Load scripts and smaller CSV files live.   
+Summarize growth geographies following the example table below. Use Plan Bay Area 2050 growth geographies instead of PDAs. Growth Geographies data should be treated as an aggregate, dissolved geographic area. 
 
-### [docs](https://github.com/MetropolitanTransportationCommission/UrbanSim_Spatial_Analysis/tree/master/docs)  
+![growth_summary_img](docs/table_1.2-7.png)
 
-This is where output files structured as documents (PDFs) live.  
+## Methodology
 
-### [sql](https://github.com/MetropolitanTransportationCommission/UrbanSim_Spatial_Analysis/tree/master/sql)  
+### Growth Geography Summary Methods
 
-These SQL scripts are used to summarize Land Use data. Please see the README in that folder for further documentation.  
+## Expected Outcomes
 
-### [esri](https://github.com/MetropolitanTransportationCommission/UrbanSim_Spatial_Analysis/tree/master/esri)   
-
-SDE connections, Pro documents, and Toolboxes live here.  
-
-## Results  
-
-In the EIR Database. Please contact MTC GIS for details.   
+## Results
