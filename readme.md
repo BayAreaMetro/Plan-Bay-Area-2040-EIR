@@ -30,7 +30,7 @@ Add links to:
 
 ### Growth Geography Summary Parameters
 
-Summarize growth geographies following the example table below. Use Plan Bay Area 2050 growth geographies instead of PDAs. Growth Geographies data should be treated as an aggregate, dissolved geographic area. 
+Summarize growth geographies following the example table below. Use Plan Bay Area 2050 growth geographies instead of PDAs. Growth geography data should be treated as an aggregate, dissolved geographic area. 
 
 ![growth_summary_img](docs/table_1.2-7.png)
 
