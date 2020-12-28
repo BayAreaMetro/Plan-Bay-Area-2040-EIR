@@ -15,7 +15,7 @@ Add links to:
 - [Analysis Parameters](#analysis-parameters)
 	- [Growth Geography Summary Parameters](#growth-geography-summary-parameters)
 - [Methodology](#methodology)
-	- [Growth Geography Summary Methods]
+	- [Growth Geography Summary Methods](#growth-geography-summary-methods)
 - [Expected Outcomes](#expected-outcomes)
 - [Results](#results)
 
