@@ -24,6 +24,7 @@ Add links to:
 ### Growth Geography Summary Sources
 
 - [Plan Bay Area 2050 Growth Geographies (Internal Access Only)](https://arcgis.ad.mtc.ca.gov/portal/home/item.html?id=3922afc70d3a4475a98e6ae9973f2bfb)
+- [Bay Area Counties (Internal Access Only)](https://arcgis.ad.mtc.ca.gov/portal/home/item.html?id=0f39d9cf0b4f4b1380282315b09d5a23)
 - [Transit Priority Areas (Not yet linked)]()
 
 ## Analysis Parameters
