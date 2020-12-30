@@ -5,6 +5,7 @@ The purpose of this repository is to document all data work and processes in sup
 
 Add links to:
 - [Asana Project](https://app.asana.com/0/229355710745434/1189349851128091)
+- [EIR Analysis Process Documentation and Notes Box Note (Internal Access Only)](https://mtcdrive.app.box.com/notes/745639751047)
 - [EIR Project Box Directory (Internal Access Only)](https://mtcdrive.box.com/s/bebknhfq4nzhot2vf6mioq36gobxhw8a)
 - [DataViz Working Analysis and Data Folder (Internal Access Only)](https://mtcdrive.box.com/s/swyv9l5iwk75a2ajmjnye91dlfvujhdx)
 
