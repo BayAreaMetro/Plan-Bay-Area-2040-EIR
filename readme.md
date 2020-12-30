@@ -5,7 +5,8 @@ The purpose of this repository is to document all data work and processes in sup
 
 Add links to:
 - [Asana Project](https://app.asana.com/0/229355710745434/1189349851128091)
-- [EIR Box Directory (Internal Access Only)](https://mtcdrive.box.com/s/bebknhfq4nzhot2vf6mioq36gobxhw8a)
+- [EIR Project Box Directory (Internal Access Only)](https://mtcdrive.box.com/s/bebknhfq4nzhot2vf6mioq36gobxhw8a)
+- [DataViz Working Analysis and Data Folder (Internal Access Only)](https://mtcdrive.box.com/s/swyv9l5iwk75a2ajmjnye91dlfvujhdx)
 
 ## Table of Contents 
 
@@ -20,6 +21,10 @@ Add links to:
 - [Results](#results)
 
 ## Data Sources
+
+Inventory of all data collected for Plan Bay Area 2050 DEIR and location where data is stored/published as an excel spreadsheet. 
+
+[PBA 2050 Data Inventory (Internal Access Only)](https://mtcdrive.app.box.com/file/701734740559?s=43jc8eapmgh4jynd0hcwmkyu9cewfkpk)
 
 ### Growth Geography Summary Sources
 
