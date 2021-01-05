@@ -35,6 +35,21 @@ Inventory of all data collected for Plan Bay Area 2050 DEIR and location where d
 
 [PBA 2050 Data Inventory (Internal Access Only)](https://mtcdrive.app.box.com/file/701734740559?s=43jc8eapmgh4jynd0hcwmkyu9cewfkpk)
 
+Input Source Datasets:
+Project Footprint
+
+Project File GeoDatabase:
+PBA50_Growth_Areas.gdb
+
+Layers:
+- p10 Parcels (With Growth Geographies and TPA Flags)
+- PBA50 Growth Increment (2015 to 2050)
+- FMMP Urbanized Areas
+- County Boundaries
+- Water Bodies
+- PBA50 Growth Geography
+- PBA50 TPAs
+
 ### Growth Geography Summary Sources
 
 - [Plan Bay Area 2050 Growth Geographies (Internal Access Only)](https://arcgis.ad.mtc.ca.gov/portal/home/item.html?id=3922afc70d3a4475a98e6ae9973f2bfb)
