@@ -1,6 +1,14 @@
 # Environmental Impact Report Plan Bay Area 2050
 The purpose of this repository is to document all data work and processes in support of the Environmental Impact Report (EIR) for Plan Bay Area 2050. 
 
+## Define the Problem Statement
+This summary seeks to provide the following information by County:
+- Determine Growth Geography Summary relationship to TPAs [External Link](https://app.asana.com/0/304776046055605/1189349851128103)
+- Quantify the land use growth footprint, in acres, by county and within TPAs and within Growth Geographies [External Link](https://app.asana.com/0/304776046055605/1199558941018357)
+- Quantify urbanized land, existing + new urban land based on the land use growth footprint by county and within TPAs[External Link](https://app.asana.com/0/304776046055605/1199558941018357)
+- Quatify Project Footprint by Transportation Projects [External Link](https://app.asana.com/0/304776046055605/1189349851128104)
+- Quatify Footprint associated with SLR projects [External Link](https://app.asana.com/0/304776046055605/1189349851128105)
+
 ## Project Management 
 
 Add links to:
